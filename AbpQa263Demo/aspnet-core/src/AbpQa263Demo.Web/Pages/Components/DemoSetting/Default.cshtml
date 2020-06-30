@@ -1,0 +1,22 @@
+﻿@using AbpQa263Demo.Permissions
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Volo.Abp.Authorization.Permissions
+@using Volo.Abp.Identity.Localization
+@inject IHtmlLocalizer<IdentityResource> L
+@model AbpQa263Demo.Web.Pages.Components.DemoSetting.DemoSettingDto
+@inject IPermissionChecker PermissionChecker
+<form id="IdentitySettingsForm">
+    <div class="row">
+        <div class="col-md-12">
+            <hr class="my-4"/>
+            <div>
+                <h4>@L["UserSettings"]</h4>
+                @if (await PermissionChecker.IsGrantedAsync(AbpQa263DemoPermissions.UserPermission) || await PermissionChecker.IsGrantedAsync(AbpQa263DemoPermissions.HostUserPermission))
+                {
+                    <abp-input asp-for="DemoSetting"/>
+                }
+            </div>
+            <hr class="my-4"/>
+        </div>
+    </div>
+</form>
